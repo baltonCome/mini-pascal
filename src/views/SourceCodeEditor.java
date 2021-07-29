@@ -31,12 +31,11 @@ public class SourceCodeEditor extends javax.swing.JFrame {
     private void manageEditor() {
        codeEditor.setBorder(new TextAreaBorder());
     }
-    
+    git
     private void openFile() {
-        JFileChooser jFile = new JFileChooser();
-        jFile.setCurrentDirectory(new File("C:/"));
+        JFileChooser jFile = new JFileChooser(System.getProperty("user.dir"));
         
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.pas");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.pas", "pas");
         
         jFile.addChoosableFileFilter(filter);
         jFile.setAcceptAllFileFilterUsed(false);
@@ -55,7 +54,7 @@ public class SourceCodeEditor extends javax.swing.JFrame {
                 codeEditor.setText(lf.load(path).toString());
             }else{ 
                 JOptionPane.showMessageDialog(this, "Ficheiro não suportado.\nSelecione"
-                        + " ficheiros com um dos seguintes formatos(txt ou pas)", "WARNING MESSAGE",JOptionPane.WARNING_MESSAGE);
+                        + " ficheiro com o seguinte formato pas", "WARNING MESSAGE",JOptionPane.WARNING_MESSAGE);
             }
         }else if(result == CANCEL_OPTION){ System.out.println("CANCELED"); }
     }
