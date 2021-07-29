@@ -1,6 +1,14 @@
 package views;
 
+import controllers.LoadFile;
+import java.io.File;
 import java.util.List;
+import javax.swing.JFileChooser;
+import static javax.swing.JFileChooser.APPROVE_OPTION;
+import static javax.swing.JFileChooser.CANCEL_OPTION;
+import static javax.swing.JFileChooser.OPEN_DIALOG;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import lexical.Analyzer;
 import models.TextAreaBorder;
@@ -22,7 +30,34 @@ public class SourceCodeEditor extends javax.swing.JFrame {
 
     private void manageEditor() {
        codeEditor.setBorder(new TextAreaBorder());
-       String teste = codeEditor.getText();
+    }
+    
+    private void openFile() {
+        JFileChooser jFile = new JFileChooser();
+        jFile.setCurrentDirectory(new File("C:/"));
+        
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.pas");
+        
+        jFile.addChoosableFileFilter(filter);
+        jFile.setAcceptAllFileFilterUsed(false);
+        
+        jFile.setDialogType(OPEN_DIALOG); 
+        
+        int result = jFile.showOpenDialog(this);
+        
+        if(result == APPROVE_OPTION){
+            File selectedFile = jFile.getSelectedFile();
+            String path = selectedFile.getAbsolutePath();
+            
+            if(path.toLowerCase().endsWith("pas")) {
+                LoadFile lf = new LoadFile();
+                
+                codeEditor.setText(lf.load(path).toString());
+            }else{ 
+                JOptionPane.showMessageDialog(this, "Ficheiro não suportado.\nSelecione"
+                        + " ficheiros com um dos seguintes formatos(txt ou pas)", "WARNING MESSAGE",JOptionPane.WARNING_MESSAGE);
+            }
+        }else if(result == CANCEL_OPTION){ System.out.println("CANCELED"); }
     }
     
 
@@ -39,7 +74,7 @@ public class SourceCodeEditor extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         main = new javax.swing.JPanel();
         toolBar = new javax.swing.JToolBar();
-        jLabel2 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         internalToolBar1 = new javax.swing.JToolBar();
         internalToolBar2 = new javax.swing.JToolBar();
         jButton2 = new javax.swing.JButton();
@@ -82,8 +117,16 @@ public class SourceCodeEditor extends javax.swing.JFrame {
 
         toolBar.setMargin(new java.awt.Insets(5, 5, 5, 5));
 
-        jLabel2.setText("NEW PROJECT");
-        toolBar.add(jLabel2);
+        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_file_24px_2.png"))); // NOI18N
+        jButton4.setText("Open file");
+        jButton4.setFocusable(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        toolBar.add(jButton4);
 
         internalToolBar1.setRollover(true);
         toolBar.add(internalToolBar1);
@@ -245,6 +288,11 @@ public class SourceCodeEditor extends javax.swing.JFrame {
         file.add(jSeparator1);
 
         openProject.setText("Open Project");
+        openProject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openProjectActionPerformed(evt);
+            }
+        });
         file.add(openProject);
 
         topBar.add(file);
@@ -274,6 +322,14 @@ public class SourceCodeEditor extends javax.swing.JFrame {
         DefaultTableModel tableModel = (DefaultTableModel) tokenClass.getModel();
         tableModel.setNumRows(0);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void openProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openProjectActionPerformed
+        openFile();
+    }//GEN-LAST:event_openProjectActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       openFile();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     
     private void catchCode() {
@@ -368,8 +424,8 @@ public class SourceCodeEditor extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
