@@ -21,6 +21,7 @@ public enum TokenType {
     TYPE(Type.KEYWORD, "TYPE"),
     OF(Type.KEYWORD, "OF"),
     WRITE(Type.KEYWORD, "WRITE"),
+    WRITELN(Type.KEYWORD, "WRITELN"),
     READ(Type.KEYWORD, "READ"),
     NOT(Type.KEYWORD, "NOT"),
     WHILE(Type.KEYWORD, "WHILE"),
@@ -62,6 +63,7 @@ public enum TokenType {
     RIGHT_BRACKET(Type.SPECIAL_SYMBOL, "]"),
     COLON(Type.SPECIAL_SYMBOL, ":"),
     DOT(Type.SPECIAL_SYMBOL, "."),
+    SINGLE_QUOTE(Type.SPECIAL_SYMBOL, "'"),
     DOUBLE_DOT(Type.SPECIAL_SYMBOL, "..");
 
     private final Type type;
