@@ -40,14 +40,7 @@ public class Analyzer {
                                 lines.add(ss[0].trim());
                             lines.add(symbol.trim());
                         } else {
-                            /*for (String ss: Symbol.load()) {
-                                if (s.trim().contains(ss)) {
-                                    String[] _ss = s.trim().split("[" + ss + "]");
-                                    if (_ss.length > 0)
-                                        lines.add(_ss[0].trim()).add("\n");
-                                    lines.add(ss.trim()).add("\n");
-                                }
-                            }*/
+                            
                             lines.add(s.trim());
                         }
                     }
@@ -107,30 +100,7 @@ public class Analyzer {
         else if ((line.startsWith("//") && line.endsWith("//")) ||
                 (line.startsWith("/*") && line.endsWith("*/")))
             return Type.COMMENTS;
-        /*else {
-            TokenType.list(Type.SPECIAL_SYMBOL).forEach(ss -> {
-
-                if (line.contains(ss)) {
-
-                    final String[] symbol = line.trim().split(String.format("[\\%s", ss +"]"));
-
-                    for (String tk: symbol) {
-                        //System.err.println(tk);
-                        if (!tk.isEmpty() && !(tk.startsWith("\"") && tk.endsWith(ss)))
-                            //if (sb.indexOf(ss) == -1)
-                                word.append(tk).append("\n").append(ss).append("\n");
-                            //else sb.append(tk).append("\n");
-                        else if (tk.startsWith("\"") && tk.endsWith(ss)) {
-                            System.err.println("1");
-                            word.append(line, 0, line.indexOf(ss)).append("\n").append(ss).append("\n");
-                        }
-                    }
-                } /*else if (line.contains("\"") && line.endsWith(ss)) {
-                    System.err.println("1");
-                    word.append(line, 0, line.indexOf(ss)).append("\n").append(ss).append("\n");
-                }*/
-            //});
-        //}*/
+        
         return Type.UNDEFINED;
     }
 }

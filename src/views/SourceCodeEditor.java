@@ -31,7 +31,7 @@ public class SourceCodeEditor extends javax.swing.JFrame {
     private void manageEditor() {
        codeEditor.setBorder(new TextAreaBorder());
     }
-    git
+    
     private void openFile() {
         JFileChooser jFile = new JFileChooser(System.getProperty("user.dir"));
         
